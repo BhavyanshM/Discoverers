@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        config {
-            keyAlias 'disckey'
-            keyPassword 'disckey'
-            storeFile file('C:/Users/bhavy/Documents/keystore/disckeystore.jks')
-            storePassword 'android'
-        }
-    }
+//    signingConfigs {
+//        config {
+//            keyAlias 'disckey'
+//            keyPassword 'disckey'
+//            storeFile file('C:/Users/bhavy/Documents/keystore/disckeystore.jks')
+//            storePassword 'android'
+//        }
+//    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.computecrib.discoverers"
@@ -24,7 +24,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            signingConfig signingConfigs.config
+//            signingConfig signingConfigs.config
         }
     }
 }
