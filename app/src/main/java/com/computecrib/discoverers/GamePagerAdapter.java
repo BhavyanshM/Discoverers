@@ -17,7 +17,7 @@ public class GamePagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-
+        return names[position];
     }
 
     @Override
@@ -30,7 +30,7 @@ public class GamePagerAdapter extends FragmentPagerAdapter {
 //            case 2:
 //                return new PlacesFragment();
             default:
-                return new SongsFragment();
+                return new ChallengesFragment();
         }
     }
 
