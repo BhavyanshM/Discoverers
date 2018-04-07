@@ -1,11 +1,20 @@
 package com.computecrib.discoverers;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class MakeChallengeActivity extends AppCompatActivity
 {
@@ -20,12 +29,17 @@ public class MakeChallengeActivity extends AppCompatActivity
     private EditText mChallengeScore;
     private Button mChallengeButton;
 
+    // Access a Cloud Firestore instance from your Activity
+    private FirebaseFirestore db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_challenge);
+
+        db = FirebaseFirestore.getInstance();
 
         mChallengeTitle = (EditText) findViewById(R.id.et_challenge_title);
         mChallengeDesc = (EditText) findViewById(R.id.et_challenge_description);
@@ -44,6 +58,28 @@ public class MakeChallengeActivity extends AppCompatActivity
                 int score = Integer.parseInt(mChallengeScore.getText().toString());
 
                 Log.d(TAG, "onClick: Title: "  + title + " Desc: " + desc + " Hint: " + hint + " Score: " + score);
+                // Create a new user with a first and last name
+                Map<String, Object> challenge = new HashMap<>();
+                challenge.put("title", title);
+                challenge.put("desc", desc);
+                challenge.put("hint", hint);
+                challenge.put("score", score);
+
+// Add a new document with a generated ID
+                db.collection("challenges")
+                        .add(challenge)
+                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+                                Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Log.w(TAG, "Error adding document", e);
+                            }
+                        });
             }
         });
     }
