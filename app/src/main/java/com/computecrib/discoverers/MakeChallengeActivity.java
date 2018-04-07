@@ -58,6 +58,7 @@ public class MakeChallengeActivity extends AppCompatActivity
                 String desc = mChallengeDesc.getText().toString();
                 String hint = mChallengeHint.getText().toString();
                 int score = Integer.parseInt(mChallengeScore.getText().toString());
+                Long tsLong = System.currentTimeMillis()/1000;
 
                 Log.d(TAG, "onClick: Title: "  + title + " Desc: " + desc + " Hint: " + hint + " Score: " + score);
                 // Create a new user with a first and last name
@@ -66,6 +67,7 @@ public class MakeChallengeActivity extends AppCompatActivity
                 challenge.put("desc", desc);
                 challenge.put("hint", hint);
                 challenge.put("score", score);
+                challenge.put("timestamp", tsLong);
 
 // Add a new document with a generated ID
                 db.collection("challenges")

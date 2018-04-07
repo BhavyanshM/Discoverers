@@ -37,6 +37,7 @@ public class ChallengesRecyclerAdapter extends RecyclerView.Adapter<ChallengesRe
         holder.itemView.setTag(position);
         holder.textViewChallengeTitle.setText(item.getTitle());
         holder.textViewChallengeDescription.setText(item.getDescription());
+        holder.textViewChallengeReward.setText(Integer.toString(item.getReward()));
 //        Glide.with(context)
 //                .load(item.getThumbPath())
 //                .thumbnail(0.5f)

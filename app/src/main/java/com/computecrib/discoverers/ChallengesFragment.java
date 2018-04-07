@@ -3,18 +3,24 @@ package com.computecrib.discoverers;
 
 import android.app.Notification;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -24,6 +30,10 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  */
 public class ChallengesFragment extends Fragment {
+
+    // Consts
+    private static final String TAG = "ChallengesFragment";
+
     private RecyclerView recyclerView;
     private ArrayList<Challenge> challenges;
     private RecyclerView.Adapter adapter;
@@ -61,7 +71,32 @@ public class ChallengesFragment extends Fragment {
         adapter = new ChallengesRecyclerAdapter(challenges, getContext());
         recyclerView.setAdapter(adapter);
 
-        db.collection("challenges").addSnapshotListener(new EventListener<QuerySnapshot>() {
+        /*db.collection("challenges")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Log.d(TAG, document.getId() + " => " + document.getData());
+                                String title = document.getData().get("title").toString();
+                                String desc = document.getData().get("desc").toString();
+                                int score = Integer.parseInt(document.getData().get("score").toString());
+
+                                Challenge challenge = new Challenge(title, desc, score);
+                                challenges.add(challenge);
+
+                            }
+
+                            adapter.notifyDataSetChanged();
+
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });*/
+
+        db.collection("challenges").orderBy("timestamp", Query.Direction.ASCENDING).addSnapshotListener(new EventListener<QuerySnapshot>() {
 
             @Override
             public void onEvent(@Nullable QuerySnapshot snapshots,
@@ -78,8 +113,8 @@ public class ChallengesFragment extends Fragment {
                         int score = Integer.parseInt(dc.getDocument().getData().get("score").toString());
 
                         Challenge challenge = new Challenge(title, desc, score);
-                        challenges.add(challenge);
-                        adapter.notifyItemInserted(challenges.size() - 1);
+                        challenges.add(0, challenge);
+                        adapter.notifyItemInserted(0);
 
                         //Notification.Builder nb = mNotificatioinUtils.getAndroidChannelNotification(title, body);
                         //mNotificatioinUtils.getManager().notify(101, nb.build());
