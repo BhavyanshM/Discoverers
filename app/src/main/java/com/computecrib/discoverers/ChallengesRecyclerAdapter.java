@@ -1,12 +1,14 @@
 package com.computecrib.discoverers;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -17,6 +19,8 @@ import java.util.List;
 public class ChallengesRecyclerAdapter extends RecyclerView.Adapter<ChallengesRecyclerAdapter.Holder>{
     private List<Challenge> challenges;
     private Context context;
+    private static final int CHALLENGE_SOLUTION_REQUEST = 101;
+
 
     public ChallengesRecyclerAdapter(List<Challenge> challenges, Context context){
         this.challenges = challenges;
@@ -37,6 +41,13 @@ public class ChallengesRecyclerAdapter extends RecyclerView.Adapter<ChallengesRe
         holder.itemView.setTag(position);
         holder.textViewChallengeTitle.setText(item.getTitle());
         holder.textViewChallengeDescription.setText(item.getDescription());
+        holder.textViewChallengeReward.setText(Integer.toString(item.getReward()));
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
 //        Glide.with(context)
 //                .load(item.getThumbPath())
 //                .thumbnail(0.5f)
@@ -55,6 +66,7 @@ public class ChallengesRecyclerAdapter extends RecyclerView.Adapter<ChallengesRe
 
         public Holder(View itemView){
             super(itemView);
+            itemView.setOnClickListener(this);
             textViewChallengeTitle = (TextView) itemView.findViewById(R.id.tv_challenge_title);
             textViewChallengeDescription = (TextView) itemView.findViewById(R.id.tv_challenge_description);
             textViewChallengeReward = (TextView) itemView.findViewById(R.id.tv_challenge_score);
@@ -65,7 +77,9 @@ public class ChallengesRecyclerAdapter extends RecyclerView.Adapter<ChallengesRe
         @Override
         public void onClick(View view) {
 //            Intent intent = new Intent();
-            Log.d("ChallengeAdapter","CLICKTHEBUTTON");
+            Toast.makeText(view.getContext(), "RecyclerView Clicked", Toast.LENGTH_SHORT);
+            Intent intent = new Intent(view.getContext(), ChallengeDetailActivity.class);
+            ((Activity)context).startActivityForResult(intent, CHALLENGE_SOLUTION_REQUEST);
         }
     }
 

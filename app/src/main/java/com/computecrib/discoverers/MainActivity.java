@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int CHALLENGE_SOLUTION_REQUEST = 101;
     private static final int RC_SIGN_IN = 9001;
     private static final int RC_UNUSED = 49001;
+    private static final int RC_MAKE_CHALLENGE = 4001;
 //    private GoogleSignInClient mGoogleSignInClient;
 //    private AchievementsClient mAchievementsClient;
 //    private LeaderboardsClient mLeaderboardsClient;
@@ -47,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ChallengeDetailActivity.class);
-                startActivityForResult(intent, CHALLENGE_SOLUTION_REQUEST);
+                Intent intent = new Intent(MainActivity.this, MakeChallengeActivity.class);
+                startActivityForResult(intent, RC_MAKE_CHALLENGE);
             }
         });
 
@@ -72,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
 //    @SuppressLint("RestrictedApi")
 //    public boolean isSignedIn(){
 //        return GoogleSignIn.getLastSignedInAccount(this) != null;
@@ -85,6 +87,13 @@ public class MainActivity extends AppCompatActivity {
                 String result=data.getStringExtra("result");
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }else if (requestCode == RC_MAKE_CHALLENGE) {
+            if(resultCode == Activity.RESULT_OK){
+                String result = data.getStringExtra("result");
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code if there's no result
