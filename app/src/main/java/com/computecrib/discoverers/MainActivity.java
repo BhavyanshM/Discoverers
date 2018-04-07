@@ -1,6 +1,7 @@
 package com.computecrib.discoverers;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static final int RC_SIGN_IN = 9001;
     private static final int RC_UNUSED = 49001;
+    private static final int RC_MAKE_CHALLENGE = 4001;
 //    private GoogleSignInClient mGoogleSignInClient;
 //    private AchievementsClient mAchievementsClient;
 //    private LeaderboardsClient mLeaderboardsClient;
@@ -47,9 +49,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, MakeChallengeActivity.class);
-                startActivity(intent);
-               // Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                 //       .setAction("Action", null).show();
+                startActivityForResult(intent, RC_MAKE_CHALLENGE);
             }
         });
 
@@ -72,6 +72,19 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == RC_MAKE_CHALLENGE) {
+            if(resultCode == Activity.RESULT_OK){
+                String result = data.getStringExtra("result");
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }//onActivityResult
 
 //    @SuppressLint("RestrictedApi")
 //    public boolean isSignedIn(){

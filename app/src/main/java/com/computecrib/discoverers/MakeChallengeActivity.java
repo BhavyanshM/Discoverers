@@ -1,5 +1,6 @@
 package com.computecrib.discoverers;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -77,8 +78,11 @@ public class MakeChallengeActivity extends AppCompatActivity
                             public void onSuccess(DocumentReference documentReference) {
                                 Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
                                 Toast.makeText(MakeChallengeActivity.this, "Submitted Challenge", Toast.LENGTH_SHORT);
-                                Intent intent = new Intent(MakeChallengeActivity.this, MainActivity.class);
-                                startActivity(intent);
+
+                                Intent returnIntent = new Intent();
+                                returnIntent.putExtra("result","Submitted Challenge");
+                                setResult(Activity.RESULT_OK,returnIntent);
+                                finish();
 
                             }
                         })
