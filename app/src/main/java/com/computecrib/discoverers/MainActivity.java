@@ -1,9 +1,10 @@
 package com.computecrib.discoverers;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +25,7 @@ import com.astuetz.PagerSlidingTabStrip;
 @SuppressLint("RestrictedApi")
 public class MainActivity extends AppCompatActivity {
 
+    private static final int CHALLENGE_SOLUTION_REQUEST = 101;
     private static final int RC_SIGN_IN = 9001;
     private static final int RC_UNUSED = 49001;
 //    private GoogleSignInClient mGoogleSignInClient;
@@ -45,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent intent = new Intent(getApplicationContext(), ChallengeDetailActivity.class);
+                startActivityForResult(intent, CHALLENGE_SOLUTION_REQUEST);
             }
         });
 
@@ -74,6 +76,21 @@ public class MainActivity extends AppCompatActivity {
 //    public boolean isSignedIn(){
 //        return GoogleSignIn.getLastSignedInAccount(this) != null;
 //    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == CHALLENGE_SOLUTION_REQUEST) {
+            if(resultCode == Activity.RESULT_OK){
+                String result=data.getStringExtra("result");
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
