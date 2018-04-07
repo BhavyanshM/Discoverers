@@ -3,14 +3,18 @@ package com.computecrib.discoverers;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
 
@@ -24,7 +28,8 @@ import com.astuetz.PagerSlidingTabStrip;
 //import com.google.android.gms.tasks.Task;
 @SuppressLint("RestrictedApi")
 public class MainActivity extends AppCompatActivity {
-
+    static Challenge currentChallenge;
+    private static final int PLACE_PICKER_REQUEST = 102;
     private static final int CHALLENGE_SOLUTION_REQUEST = 101;
     private static final int RC_SIGN_IN = 9001;
     private static final int RC_UNUSED = 49001;
@@ -39,6 +44,12 @@ public class MainActivity extends AppCompatActivity {
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},1);
+            }
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -85,6 +96,8 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == CHALLENGE_SOLUTION_REQUEST) {
             if(resultCode == Activity.RESULT_OK){
                 String result=data.getStringExtra("result");
+                Toast.makeText(this, "THIS:" + result, Toast.LENGTH_LONG).show();
+
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
             }

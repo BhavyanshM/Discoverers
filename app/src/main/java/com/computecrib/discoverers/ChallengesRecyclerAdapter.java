@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -77,7 +76,10 @@ public class ChallengesRecyclerAdapter extends RecyclerView.Adapter<ChallengesRe
         @Override
         public void onClick(View view) {
 //            Intent intent = new Intent();
-            Toast.makeText(view.getContext(), "RecyclerView Clicked", Toast.LENGTH_SHORT);
+            String desc = textViewChallengeDescription.getText().toString();
+            String title = textViewChallengeDescription.getText().toString();
+            int score = Integer.parseInt(textViewChallengeDescription.getText().toString());
+            MainActivity.currentChallenge = new Challenge(title, desc, score);
             Intent intent = new Intent(view.getContext(), ChallengeDetailActivity.class);
             ((Activity)context).startActivityForResult(intent, CHALLENGE_SOLUTION_REQUEST);
         }
