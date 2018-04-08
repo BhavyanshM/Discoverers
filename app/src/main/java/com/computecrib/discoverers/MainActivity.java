@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int RC_UNUSED = 49001;
     private static final int RC_MAKE_CHALLENGE = 4001;
 
-    public static boolean successful = false;
+    public static Boolean successful = null;
     private Button okayButton;
 //    private GoogleSignInClient mGoogleSignInClient;
 //    private AchievementsClient mAchievementsClient;
@@ -173,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 else {
                     Toast.makeText(this, "INCORRECT", Toast.LENGTH_LONG).show();
+                    successful = false;
                 }
 
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -263,11 +264,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (successful) {
+        if (successful != null)
+        {
+            if (successful)
+            {
 
-            Log.d(TAG, "onResume: DISPLAYING SUCCESS FRAG");
-            SuccessFragment successFragment = new SuccessFragment();
-            successFragment.show(getSupportFragmentManager(), "fragment_edit_name");
+                Log.d(TAG, "onResume: DISPLAYING SUCCESS FRAG");
+                SuccessFragment successFragment = new SuccessFragment();
+                // Supply num input as an argument.
+                Bundle args = new Bundle();
+                args.putBoolean("successful", true);
+                successFragment.setArguments(args);
+                successFragment.show(getSupportFragmentManager(), "fragment_edit_name");
 //            final View fadeBackground = findViewById(R.id.fadeBackground);
 //            fadeBackground.setVisibility(View.VISIBLE);
 //            fadeBackground.animate().alpha(0.5f);
@@ -282,6 +290,17 @@ public class MainActivity extends AppCompatActivity {
 //            // Add the fragment to the 'fragment_container' FrameLayout
 //            getSupportFragmentManager().beginTransaction()
 //                    .add(R.id.fragment_container, successFragment).commitAllowingStateLoss();
+            } else if (!successful)
+            {
+
+                SuccessFragment successFragment = new SuccessFragment();
+                // Supply num input as an argument.
+                Bundle args = new Bundle();
+                args.putBoolean("successful", false);
+                successFragment.setArguments(args);
+                successFragment.show(getSupportFragmentManager(), "fragment_edit_name");
+
+            }
         }
 //        signInSilently();
     }
