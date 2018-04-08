@@ -68,6 +68,8 @@ public class MakeChallengeActivity extends AppCompatActivity
                 challenge.put("desc", desc);
                 challenge.put("hint", hint);
                 challenge.put("score", score);
+                challenge.put("loc_name", "location_name");
+                challenge.put("loc_address", "location_address");
                 challenge.put("timestamp", tsLong);
 
 // Add a new document with a generated ID

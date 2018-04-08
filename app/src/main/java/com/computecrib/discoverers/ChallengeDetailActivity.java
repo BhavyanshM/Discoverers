@@ -19,7 +19,15 @@ import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.ui.PlacePicker;
 
 public class ChallengeDetailActivity extends AppCompatActivity {
+
+    // Consts
     private static final int PLACE_PICKER_REQUEST = 102;
+
+    // Widgets
+    private TextView mChallengeTitle;
+    private TextView mChallengeDesc;
+    private TextView mChallengeHint;
+    private TextView mChallengeScore;
     private TextView mSelectedLocation;
     private Button mSubmitButton;
     private Button mSetLocationButton;
@@ -33,6 +41,17 @@ public class ChallengeDetailActivity extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
+        mChallengeTitle = (TextView) findViewById(R.id.tv_title);
+        mChallengeTitle.setText("Title: " + MainActivity.currentChallenge.getTitle());
+
+        mChallengeDesc = (TextView) findViewById(R.id.tv_description);
+        mChallengeDesc.setText("Description: " + MainActivity.currentChallenge.getDescription());
+
+        mChallengeHint = (TextView) findViewById(R.id.tv_hint);
+        mChallengeHint.setText("Hint: " + MainActivity.currentChallenge.getHint());
+
+        mChallengeScore = (TextView) findViewById(R.id.tv_score);
+        mChallengeScore.setText(Integer.toString(MainActivity.currentChallenge.getReward()));
 
         mSelectedLocation = (TextView) findViewById(R.id.tv_challenge_location);
         mSubmitButton = (Button) findViewById(R.id.bv_submit_challenge);

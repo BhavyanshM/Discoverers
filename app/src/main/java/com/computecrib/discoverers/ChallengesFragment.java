@@ -85,9 +85,13 @@ public class ChallengesFragment extends Fragment {
                     if (dc.getType() == DocumentChange.Type.ADDED) {
                         String title = dc.getDocument().getData().get("title").toString();
                         String desc = dc.getDocument().getData().get("desc").toString();
+                        String hint = dc.getDocument().getData().get("hint").toString();
+                        String loc_name = dc.getDocument().getData().get("loc_name").toString();
+                        String loc_address = dc.getDocument().getData().get("loc_address").toString();
                         int score = Integer.parseInt(dc.getDocument().getData().get("score").toString());
 
-                        Challenge challenge = new Challenge(title, desc, score);
+                        Challenge challenge = new Challenge(title, desc,
+                                hint, loc_name, loc_address, score);
                         challenges.add(0, challenge);
                         adapter.notifyItemInserted(0);
 
