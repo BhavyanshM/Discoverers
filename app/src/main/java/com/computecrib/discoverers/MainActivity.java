@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-//import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +18,8 @@ import android.widget.Toast;
 import com.astuetz.PagerSlidingTabStrip;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
+//import android.support.design.widget.FloatingActionButton;
 
 //import com.google.android.gms.auth.api.Auth;
 //import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -107,6 +108,35 @@ public class MainActivity extends AppCompatActivity {
 //                startSignInIntent();
 //            }
 //        });
+//        new TapTargetSequence(this)
+//                .targets(
+//                        TapTarget.forView(findViewById(R.id.), "Gonna"),
+//                        TapTarget.forView(findViewById(R.id.give), "You", "Up")
+//                                .dimColor(android.R.color.never)
+//                                .outerCircleColor(R.color.gonna)
+//                                .targetCircleColor(R.color.let)
+//                                .textColor(android.R.color.you),
+//                        TapTarget.forBounds(rickTarget, "Down", ":^)")
+//                                .cancelable(false)
+//                                .icon(rick))
+//                .listener(new TapTargetSequence.Listener() {
+//                    // This listener will tell us when interesting(tm) events happen in regards
+//                    // to the sequence
+//                    @Override
+//                    public void onSequenceFinish() {
+//                        // Yay
+//                    }
+//
+//                    @Override
+//                    public void onSequenceStep(TapTarget lastTarget) {
+//                        // Perfom action for the current target
+//                    }
+//
+//                    @Override
+//                    public void onSequenceCanceled(TapTarget lastTarget) {
+//                        // Boo
+//                    }
+//                });
 
     }
 
