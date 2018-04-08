@@ -39,7 +39,7 @@ public class ChallengeDetailActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         mChallengeTitle = (TextView) findViewById(R.id.tv_title);
         mChallengeTitle.setText("Title: " + MainActivity.currentChallenge.getTitle());

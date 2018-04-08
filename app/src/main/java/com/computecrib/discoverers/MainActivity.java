@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+//import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 //import com.google.android.gms.auth.api.Auth;
 //import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -55,14 +57,38 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton basicChallengeBtn = (FloatingActionButton) findViewById(R.id.add_basic_challenge);
+        basicChallengeBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Intent intent = new Intent(MainActivity.this, MakeChallengeActivity.class);
+                startActivityForResult(intent, RC_MAKE_CHALLENGE);
+            }
+        });
+        FloatingActionButton seqChallengeBtn = (FloatingActionButton) findViewById(R.id.add_seq_challenge);
+        seqChallengeBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Toast.makeText(MainActivity.this, "Sequence Challenge", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        FloatingActionsMenu menuFab = (FloatingActionsMenu) findViewById(R.id.fab_menu);
+    //    menuFab.addButton(basicChallengeBtn);
+        //menuFab.addButton(seqChallengeBtn);
+
+       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, MakeChallengeActivity.class);
                 startActivityForResult(intent, RC_MAKE_CHALLENGE);
             }
-        });
+        });*/
 
         ViewPager pager = (ViewPager) findViewById(R.id.pager);
         pager.setAdapter(new GamePagerAdapter(getSupportFragmentManager()));
