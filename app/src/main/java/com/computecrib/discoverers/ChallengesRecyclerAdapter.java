@@ -89,8 +89,8 @@ public class ChallengesRecyclerAdapter extends RecyclerView.Adapter<ChallengesRe
             String desc = textViewChallengeDescription.getText().toString();
             String title = textViewChallengeTitle.getText().toString();
             String hint = textViewChallengeHint.getText().toString();
-            String name = textViewChallengeTitle.getText().toString();
-            String address = textViewChallengeTitle.getText().toString();
+            String name = textViewChallengeName.getText().toString();
+            String address = textViewChallengeAddress.getText().toString();
             int score = Integer.parseInt(textViewChallengeReward.getText().toString());
             MainActivity.currentChallenge = new Challenge(title, desc, hint,
                     name, address, score);
