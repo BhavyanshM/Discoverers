@@ -70,6 +70,16 @@
             android:layout_gravity="bottom|start"
             android:visibility="invisible"/>
 
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            android:id="@+id/fab_placeholder"
+            android:layout_gravity="bottom|end"
+            android:layout_marginRight="28dp"
+            android:layout_marginBottom="28dp"
+            />
+
         <com.getbase.floatingactionbutton.FloatingActionsMenu
             android:id="@+id/fab_menu"
             android:layout_width="wrap_content"
@@ -84,6 +94,8 @@
             app:fab_labelStyle="@style/menu_labels_style"
             app:fab_labelsPosition="left"
             >
+
+
 
             <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/add_seq_challenge"
@@ -113,6 +125,15 @@
                 app:fab_title="Basic Challenge"
                 app:fab_colorPressed="#2196F3"
                 app:fab_icon="@drawable/ic_basic"/>
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_invite_friend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_colorNormal="#1565C0"
+                app:fab_title="Invite Challenge"
+                app:fab_colorPressed="#2196F3"
+                app:fab_icon="@drawable/ic_share_black_24dp"/>
 
 
         </com.getbase.floatingactionbutton.FloatingActionsMenu>

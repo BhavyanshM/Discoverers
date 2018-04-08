@@ -100,6 +100,13 @@ public class MakeChallengeActivity extends AppCompatActivity
                 String locationName = mLocationName.getText().toString();
                 String locationAddress = mLocationAddress.getText().toString();
 
+                MainActivity.currentChallenge = new Challenge(title,
+                        desc,
+                        hint,
+                        locationName,
+                        locationAddress,
+                        score);
+
                 Log.d(TAG, "onClick: Title: "  + title + " Desc: " + desc + " Hint: " + hint + " Score: " + score);
                 // Create a new user with a first and last name
                 Map<String, Object> challenge = new HashMap<>();
