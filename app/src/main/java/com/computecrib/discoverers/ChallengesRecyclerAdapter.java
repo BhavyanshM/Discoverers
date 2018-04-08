@@ -77,8 +77,8 @@ public class ChallengesRecyclerAdapter extends RecyclerView.Adapter<ChallengesRe
         public void onClick(View view) {
 //            Intent intent = new Intent();
             String desc = textViewChallengeDescription.getText().toString();
-            String title = textViewChallengeDescription.getText().toString();
-            int score = Integer.parseInt(textViewChallengeDescription.getText().toString());
+            String title = textViewChallengeTitle.getText().toString();
+            int score = Integer.parseInt(textViewChallengeReward.getText().toString());
             MainActivity.currentChallenge = new Challenge(title, desc, score);
             Intent intent = new Intent(view.getContext(), ChallengeDetailActivity.class);
             ((Activity)context).startActivityForResult(intent, CHALLENGE_SOLUTION_REQUEST);
