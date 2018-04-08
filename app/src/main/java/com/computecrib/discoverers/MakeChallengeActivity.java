@@ -97,6 +97,8 @@ public class MakeChallengeActivity extends AppCompatActivity
                 String hint = mChallengeHint.getText().toString();
                 int score = Integer.parseInt(mChallengeScore.getText().toString());
                 Long tsLong = System.currentTimeMillis()/1000;
+                String locationName = mLocationName.getText().toString();
+                String locationAddress = mLocationAddress.getText().toString();
 
                 Log.d(TAG, "onClick: Title: "  + title + " Desc: " + desc + " Hint: " + hint + " Score: " + score);
                 // Create a new user with a first and last name
@@ -105,6 +107,8 @@ public class MakeChallengeActivity extends AppCompatActivity
                 challenge.put("desc", desc);
                 challenge.put("hint", hint);
                 challenge.put("score", score);
+                challenge.put("loc_name", locationName);
+                challenge.put("loc_address", locationAddress);
                 challenge.put("timestamp", tsLong);
 
 // Add a new document with a generated ID

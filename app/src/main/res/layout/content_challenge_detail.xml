@@ -10,8 +10,8 @@
     tools:showIn="@layout/activity_challenge_detail">
 
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/met_title"
+    <TextView
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -20,10 +20,12 @@
         android:paddingLeft="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:met_floatingLabel="highlight" />
+        android:textSize="26dp"
+        android:textColor="#000"
+        />
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/met_description"
+    <TextView
+        android:id="@+id/tv_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -31,11 +33,27 @@
         android:hint="Description"
         android:paddingLeft="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/met_title"
-        app:met_floatingLabel="highlight" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
+        android:textSize="26dp"
+        android:textColor="#000"
+        />
 
-    <com.rengwuxian.materialedittext.MaterialEditText
-        android:id="@+id/met_score"
+    <TextView
+        android:id="@+id/tv_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:hint="Description"
+        android:paddingLeft="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description"
+        android:textSize="26dp"
+        android:textColor="#000"
+        />
+
+    <TextView
+        android:id="@+id/tv_score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -43,8 +61,10 @@
         android:hint="Score"
         android:paddingLeft="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/met_description"
-        app:met_floatingLabel="highlight" />
+        app:layout_constraintTop_toBottomOf="@id/tv_hint"
+        android:textSize="26dp"
+        android:textColor="#000"
+        />
 
     <TextView
         android:id="@+id/tv_challenge_location"
@@ -54,7 +74,10 @@
         android:layout_marginTop="16dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/met_score" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_score"
+        android:textSize="26dp"
+        android:textColor="#000"
+        />
 
     <Button
         android:id="@+id/bv_submit_challenge"

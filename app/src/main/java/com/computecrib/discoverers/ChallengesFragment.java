@@ -1,26 +1,20 @@
 package com.computecrib.discoverers;
 
 
-import android.app.Notification;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -85,9 +79,13 @@ public class ChallengesFragment extends Fragment {
                     if (dc.getType() == DocumentChange.Type.ADDED) {
                         String title = dc.getDocument().getData().get("title").toString();
                         String desc = dc.getDocument().getData().get("desc").toString();
+                        String hint = dc.getDocument().getData().get("hint").toString();
+                       String loc_name = dc.getDocument().getData().get("loc_name").toString();
+                        String loc_address = dc.getDocument().getData().get("loc_address").toString();
                         int score = Integer.parseInt(dc.getDocument().getData().get("score").toString());
 
-                        Challenge challenge = new Challenge(title, desc, score);
+                        Challenge challenge = new Challenge(title, desc,
+                                hint, loc_name, loc_address, score);
                         challenges.add(0, challenge);
                         adapter.notifyItemInserted(0);
 

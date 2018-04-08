@@ -41,6 +41,9 @@ public class ChallengesRecyclerAdapter extends RecyclerView.Adapter<ChallengesRe
         holder.textViewChallengeTitle.setText(item.getTitle());
         holder.textViewChallengeDescription.setText(item.getDescription());
         holder.textViewChallengeReward.setText(Integer.toString(item.getReward()));
+        holder.textViewChallengeHint.setText(item.getHint());
+        holder.textViewChallengeName.setText(item.getName());
+        holder.textViewChallengeAddress.setText(item.getAddress());
 //        holder.itemView.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -62,12 +65,19 @@ public class ChallengesRecyclerAdapter extends RecyclerView.Adapter<ChallengesRe
         private TextView textViewChallengeTitle;
         private TextView textViewChallengeDescription;
         private TextView textViewChallengeReward;
+        private TextView textViewChallengeHint;
+        private TextView textViewChallengeName;
+        private TextView textViewChallengeAddress;
 
         public Holder(View itemView){
             super(itemView);
             itemView.setOnClickListener(this);
             textViewChallengeTitle = (TextView) itemView.findViewById(R.id.tv_challenge_title);
             textViewChallengeDescription = (TextView) itemView.findViewById(R.id.tv_challenge_description);
+            textViewChallengeHint = (TextView) itemView.findViewById(R.id.tv_challenge_hint);
+            textViewChallengeName = (TextView) itemView.findViewById(R.id.tv_challenge_loc_name);
+            textViewChallengeAddress = (TextView) itemView.findViewById(R.id.tv_challenge_loc_address);
+
             textViewChallengeReward = (TextView) itemView.findViewById(R.id.tv_challenge_score);
 
         }
@@ -78,8 +88,12 @@ public class ChallengesRecyclerAdapter extends RecyclerView.Adapter<ChallengesRe
 //            Intent intent = new Intent();
             String desc = textViewChallengeDescription.getText().toString();
             String title = textViewChallengeTitle.getText().toString();
+            String hint = textViewChallengeHint.getText().toString();
+            String name = textViewChallengeName.getText().toString();
+            String address = textViewChallengeAddress.getText().toString();
             int score = Integer.parseInt(textViewChallengeReward.getText().toString());
-            MainActivity.currentChallenge = new Challenge(title, desc, score);
+            MainActivity.currentChallenge = new Challenge(title, desc, hint,
+                    name, address, score);
             Intent intent = new Intent(view.getContext(), ChallengeDetailActivity.class);
             ((Activity)context).startActivityForResult(intent, CHALLENGE_SOLUTION_REQUEST);
         }
