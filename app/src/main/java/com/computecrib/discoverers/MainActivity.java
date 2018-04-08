@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -28,13 +27,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.games.Games;
+import com.google.android.gms.games.Player;
+import com.google.android.gms.games.PlayersClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
 
 //import android.support.design.widget.FloatingActionButton;
 
@@ -67,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
 //    private AchievementsClient mAchievementsClient;
 //    private LeaderboardsClient mLeaderboardsClient;
 //    private EventsClient mEventsClient;
-//    private PlayersClient mPlayersClient;
+    private PlayersClient mPlayersClient;
 //    private SignInButton mSignInButton;
 
     @SuppressLint("RestrictedApi")
@@ -85,9 +84,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("705477496394-ffiu4vpunk7i401tjairergs3slve0qo.apps.googleusercontent.com")
-                .requestEmail()
+        GoogleSignInOptions gso = new GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
+//                .requestIdToken("705477496394-ffiu4vpunk7i401tjairergs3slve0qo.apps.googleusercontent.com")
+//                .requestEmail()
                 .build();
 
         // Build a GoogleSignInClient with the options specified by gso.
@@ -258,7 +258,8 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     // Google Sign In was successful, authenticate with Firebase
                     GoogleSignInAccount account = task.getResult(ApiException.class);
-                    firebaseAuthWithGoogle(account);
+//                    firebaseAuthWithGoogle(account);
+                    onConnected(account);
                 } catch (ApiException e) {
                     // Google Sign In failed, update UI appropriately
                     Log.w(TAG, "Google sign in failed", e);
@@ -385,36 +386,36 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
-    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
-        // [START_EXCLUDE silent]
-//        showProgressDialog();
-        // [END_EXCLUDE]
-
-        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithCredential:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            Toast.makeText(MainActivity.this, "Successfully Signed in", Toast.LENGTH_SHORT).show();
-//                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Failed to Sign in", Toast.LENGTH_SHORT).show();
-//                            updateUI(null);
-                        }
-
-                        // [START_EXCLUDE]
-//                        hideProgressDialog();
-                        // [END_EXCLUDE]
-                    }
-                });
-    }
+//    private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
+//        Log.d(TAG, "firebaseAuthWithGoogle:" + acct.getId());
+//        // [START_EXCLUDE silent]
+////        showProgressDialog();
+//        // [END_EXCLUDE]
+//
+//        AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
+//        mAuth.signInWithCredential(credential)
+//                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<AuthResult> task) {
+//                        if (task.isSuccessful()) {
+//                            // Sign in success, update UI with the signed-in user's information
+//                            Log.d(TAG, "signInWithCredential:success");
+//                            FirebaseUser user = mAuth.getCurrentUser();
+//                            Toast.makeText(MainActivity.this, "Successfully Signed in", Toast.LENGTH_SHORT).show();
+////                            updateUI(user);
+//                        } else {
+//                            // If sign in fails, display a message to the user.
+//                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+//                            Toast.makeText(MainActivity.this, "Failed to Sign in", Toast.LENGTH_SHORT).show();
+////                            updateUI(null);
+//                        }
+//
+//                        // [START_EXCLUDE]
+////                        hideProgressDialog();
+//                        // [END_EXCLUDE]
+//                    }
+//                });
+//    }
 
     @Override
     public void onStart() {
@@ -453,5 +454,68 @@ public class MainActivity extends AppCompatActivity {
                         updateUI(null);
                     }
                 });
+    }
+
+    private void onConnected(GoogleSignInAccount googleSignInAccount) {
+        Log.d(TAG, "onConnected():" + googleSignInAccount.toString());
+        Toast.makeText(this, googleSignInAccount.toString(), Toast.LENGTH_SHORT).show();
+
+//        mAchievementsClient = Games.getAchievementsClient(this, googleSignInAccount);
+//        mLeaderboardsClient = Games.getLeaderboardsClient(this, googleSignInAccount);
+//        mEventsClient = Games.getEventsClient(this, googleSignInAccount);
+        mPlayersClient = Games.getPlayersClient(this, googleSignInAccount);
+
+//        // Show sign-out button on main menu
+//        mMainMenuFragment.setShowSignInButton(false);
+//
+//        // Show "you are signed in" message on win screen, with no sign in button.
+//        mWinFragment.setShowSignInButton(false);
+//
+//        // Set the greeting appropriately on main menu
+        mPlayersClient.getCurrentPlayer()
+                .addOnCompleteListener(new OnCompleteListener<Player>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Player> task) {
+                        String displayName;
+                        if (task.isSuccessful()) {
+                            displayName = task.getResult().getDisplayName();
+                        } else {
+                            Exception e = task.getException();
+//                            handleException(e, getString(R.string.players_exception));
+                            Log.d(TAG, "Players_Exception" + e.getMessage());
+
+                            displayName = "???";
+                        }
+                        Log.d(TAG, "onConnected():" + displayName);
+//                        mMainMenuFragment.setGreeting("Hello, " + displayName);
+                    }
+                });
+//
+//
+//        // if we have accomplishments to push, push them
+//        if (!mOutbox.isEmpty()) {
+//            pushAccomplishments();
+//            Toast.makeText(this, getString(R.string.your_progress_will_be_uploaded),
+//                    Toast.LENGTH_LONG).show();
+//        }
+//
+//        loadAndPrintEvents();
+    }
+
+    private void onDisconnected() {
+        Log.d(TAG, "onDisconnected()");
+        Toast.makeText(this, "onDisconnected()", Toast.LENGTH_SHORT).show();
+//
+//        mAchievementsClient = null;
+//        mLeaderboardsClient = null;
+//        mPlayersClient = null;
+//
+//        // Show sign-in button on main menu
+//        mMainMenuFragment.setShowSignInButton(true);
+//
+//        // Show sign-in button on win screen
+//        mWinFragment.setShowSignInButton(true);
+//
+//        mMainMenuFragment.setGreeting(getString(R.string.signed_out_greeting));
     }
 }
