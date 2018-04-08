@@ -41,15 +41,25 @@
             android:id="@+id/fab_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_gravity="bottom|end"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
             app:fab_addButtonColorNormal="#1565C0"
             app:fab_addButtonColorPressed="#2196F3"
             app:fab_addButtonPlusIconColor="#fff"
             app:fab_addButtonSize="normal"
+            app:fab_labelStyle="@style/menu_labels_style"
             app:fab_labelsPosition="left"
             >
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add_seq_challenge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_colorNormal="#1565C0"
+                app:fab_addButtonSize="normal"
+                app:fab_title="Quiz Challenge"
+                app:fab_colorPressed="#2196F3"/>
 
             <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/add_basic_challenge"
@@ -60,13 +70,16 @@
                 app:fab_colorPressed="#2196F3"/>
 
             <com.getbase.floatingactionbutton.FloatingActionButton
-                android:id="@+id/add_seq_challenge"
+                android:id="@+id/add_quiz_challenge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:fab_colorNormal="#1565C0"
                 app:fab_addButtonSize="normal"
                 app:fab_title="Sequential Challenge"
                 app:fab_colorPressed="#2196F3"/>
+
+
+
 
         </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

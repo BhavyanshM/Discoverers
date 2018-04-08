@@ -57,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        final FloatingActionsMenu menuFab = (FloatingActionsMenu) findViewById(R.id.fab_menu);
+
         FloatingActionButton basicChallengeBtn = (FloatingActionButton) findViewById(R.id.add_basic_challenge);
         basicChallengeBtn.setOnClickListener(new View.OnClickListener()
         {
@@ -65,8 +67,10 @@ public class MainActivity extends AppCompatActivity {
             {
                 Intent intent = new Intent(MainActivity.this, MakeChallengeActivity.class);
                 startActivityForResult(intent, RC_MAKE_CHALLENGE);
+                menuFab.collapseImmediately();
             }
         });
+
         FloatingActionButton seqChallengeBtn = (FloatingActionButton) findViewById(R.id.add_seq_challenge);
         seqChallengeBtn.setOnClickListener(new View.OnClickListener()
         {
@@ -74,10 +78,21 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view)
             {
                 Toast.makeText(MainActivity.this, "Sequence Challenge", Toast.LENGTH_SHORT).show();
+                menuFab.collapseImmediately();
             }
         });
 
-        FloatingActionsMenu menuFab = (FloatingActionsMenu) findViewById(R.id.fab_menu);
+        FloatingActionButton quizChallengeBtn = (FloatingActionButton) findViewById(R.id.add_quiz_challenge);
+        seqChallengeBtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Toast.makeText(MainActivity.this, "Quiz Challenge", Toast.LENGTH_SHORT).show();
+                menuFab.collapseImmediately();
+            }
+        });
+
     //    menuFab.addButton(basicChallengeBtn);
         //menuFab.addButton(seqChallengeBtn);
 
