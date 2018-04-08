@@ -8,12 +8,15 @@ import android.os.Build;
 import android.os.Bundle;
 //import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.astuetz.PagerSlidingTabStrip;
@@ -31,11 +34,16 @@ import com.getbase.floatingactionbutton.FloatingActionsMenu;
 @SuppressLint("RestrictedApi")
 public class MainActivity extends AppCompatActivity {
     static Challenge currentChallenge;
+
+    private static final String TAG = "MainActivity";
     private static final int PLACE_PICKER_REQUEST = 102;
     private static final int CHALLENGE_SOLUTION_REQUEST = 101;
     private static final int RC_SIGN_IN = 9001;
     private static final int RC_UNUSED = 49001;
     private static final int RC_MAKE_CHALLENGE = 4001;
+
+    public static boolean successful = false;
+    private Button okayButton;
 //    private GoogleSignInClient mGoogleSignInClient;
 //    private AchievementsClient mAchievementsClient;
 //    private LeaderboardsClient mLeaderboardsClient;
@@ -56,6 +64,24 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+//        okayButton = (Button) findViewById(R.id.bv_clear_frag);
+//        okayButton.setOnClickListener(new View.OnClickListener()
+//        {
+//            @Override
+//            public void onClick(View view)
+//            {
+//                final View fadeBackground = findViewById(R.id.fadeBackground);
+//                fadeBackground.setVisibility(View.INVISIBLE);
+//                //fadeBackground.animate().alpha(0.0f);
+//                MainActivity.successful = false;
+//                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.suc_frag);
+//                getSupportFragmentManager()
+//                        .beginTransaction()
+//                        .remove(fragment).commit();
+//                okayButton.setVisibility(View.INVISIBLE);
+//            }
+//        });
 
         final FloatingActionsMenu menuFab = (FloatingActionsMenu) findViewById(R.id.fab_menu);
 
@@ -136,8 +162,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CHALLENGE_SOLUTION_REQUEST) {
             if(resultCode == Activity.RESULT_OK){
-                String result=data.getStringExtra("result");
-                Toast.makeText(this, "THIS:" + result, Toast.LENGTH_LONG).show();
+                String loc_name = data.getStringExtra("loc_name");
+                String loc_address = data.getStringExtra("loc_address");
+
+                if (loc_name.equals(currentChallenge.getName())
+                        && loc_address.equals(currentChallenge.getAddress())) {
+                    Toast.makeText(this, "CORRECT", Toast.LENGTH_LONG).show();
+
+                    successful = true;
+                }
+                else {
+                    Toast.makeText(this, "INCORRECT", Toast.LENGTH_LONG).show();
+                }
 
 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                        .setAction("Action", null).show();
@@ -223,9 +259,30 @@ public class MainActivity extends AppCompatActivity {
 //        }
 //    }
 //
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        if (successful) {
+
+            Log.d(TAG, "onResume: DISPLAYING SUCCESS FRAG");
+            SuccessFragment successFragment = new SuccessFragment();
+            successFragment.show(getSupportFragmentManager(), "fragment_edit_name");
+//            final View fadeBackground = findViewById(R.id.fadeBackground);
+//            fadeBackground.setVisibility(View.VISIBLE);
+//            fadeBackground.animate().alpha(0.5f);
+//
+//            okayButton.setVisibility(View.VISIBLE);
+//            // Create a new Fragment to be placed in the activity layout
+//            SuccessFragment successFragment = new SuccessFragment();
+//
+//            // In case this activity was started with special instructions from an
+//            // Intent, pass the Intent's extras to the fragment as arguments
+//
+//            // Add the fragment to the 'fragment_container' FrameLayout
+//            getSupportFragmentManager().beginTransaction()
+//                    .add(R.id.fragment_container, successFragment).commitAllowingStateLoss();
+        }
 //        signInSilently();
-//    }
+    }
 }

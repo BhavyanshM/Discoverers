@@ -67,14 +67,27 @@
         />
 
     <TextView
-        android:id="@+id/tv_challenge_location"
+        android:id="@+id/tv_selected_loc_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text="Name:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_score"
+        android:textSize="26dp"
+        android:textColor="#000"
+        />
+
+    <TextView
+        android:id="@+id/tv_selected_loc_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Address:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_challenge_loc_name"
         android:textSize="26dp"
         android:textColor="#000"
         />

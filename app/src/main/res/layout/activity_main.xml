@@ -9,7 +9,10 @@
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
         <LinearLayout
+            android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -25,17 +28,47 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="?attr/colorPrimary"
-                    app:popupTheme="@style/AppTheme.PopupOverlay" />
+                    app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
             </android.support.design.widget.AppBarLayout>
 
-            <include layout="@layout/content_main"
-                     android:layout_width="match_parent"
-                     android:layout_height="wrap_content"/>
-
+            <include
+                layout="@layout/content_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
 
         </LinearLayout>
+
+        <View
+            android:id="@+id/fadeBackground"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layerType="hardware"
+            android:alpha="0"
+            android:visibility="gone"
+            android:background="@android:color/black"/>
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="256dp"
+            android:layout_height="128dp"
+            app:layout_anchor="@+id/linearLayout2"
+            app:layout_anchorGravity="center">
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/bv_clear_frag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginStart="16dp"
+            android:background="#6200EA"
+            android:padding="8dp"
+            android:text="Okay"
+            android:textColor="#FFFFFF"
+            android:layout_gravity="bottom|start"
+            android:visibility="invisible"/>
 
         <com.getbase.floatingactionbutton.FloatingActionsMenu
             android:id="@+id/fab_menu"
