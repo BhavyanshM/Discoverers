@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:hint="Description"
+            android:hint="None"
             android:textColor="#000"
             android:textSize="14dp" />
 
@@ -82,9 +82,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="TextView"
+            android:hint="None Selected"
             android:textColor="#000"
             android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/location_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_selected_loc_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="None Selected"
+            android:textSize="12sp"
+            android:textColor="#000"
+            />
 
         <TextView
             android:id="@+id/tv_score"
@@ -93,19 +110,6 @@
             android:hint="Score"
             android:textColor="#000"
             android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/tv_selected_loc_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:text="Address:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_challenge_loc_name"
-            android:textSize="26dp"
-            android:textColor="#000"
-            />
 
     </LinearLayout>
 

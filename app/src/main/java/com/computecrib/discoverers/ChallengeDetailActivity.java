@@ -42,13 +42,13 @@ public class ChallengeDetailActivity extends AppCompatActivity {
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 
         mChallengeTitle = (TextView) findViewById(R.id.tv_title);
-        mChallengeTitle.setText("Title: " + MainActivity.currentChallenge.getTitle());
+        mChallengeTitle.setText(MainActivity.currentChallenge.getTitle());
 
         mChallengeDesc = (TextView) findViewById(R.id.tv_description);
-        mChallengeDesc.setText("Description: " + MainActivity.currentChallenge.getDescription());
+        mChallengeDesc.setText(MainActivity.currentChallenge.getDescription());
 
         mChallengeHint = (TextView) findViewById(R.id.tv_hint);
-        mChallengeHint.setText("Hint: " + MainActivity.currentChallenge.getHint());
+        mChallengeHint.setText(MainActivity.currentChallenge.getHint());
 
         mChallengeScore = (TextView) findViewById(R.id.tv_score);
         mChallengeScore.setText(Integer.toString(MainActivity.currentChallenge.getReward()));

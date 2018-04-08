@@ -27,17 +27,24 @@
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_challenge_title" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_challenge_title"
+        android:maxWidth="256dp"
+        />
 
     <TextView
         android:id="@+id/tv_challenge_title"
-        android:layout_width="wrap_content"
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="TextView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:maxWidth="256dp"
+
+        />
 
     <TextView
         android:id="@+id/tv_challenge_hint"

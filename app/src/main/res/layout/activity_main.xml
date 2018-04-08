@@ -91,16 +91,9 @@
                 android:layout_height="wrap_content"
                 app:fab_colorNormal="#1565C0"
                 app:fab_addButtonSize="normal"
-                app:fab_title="Quiz Challenge"
-                app:fab_colorPressed="#2196F3"/>
-
-            <com.getbase.floatingactionbutton.FloatingActionButton
-                android:id="@+id/add_basic_challenge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:fab_colorNormal="#1565C0"
-                app:fab_title="Basic Challenge"
-                app:fab_colorPressed="#2196F3"/>
+                app:fab_title="Sequential Challenge"
+                app:fab_colorPressed="#2196F3"
+                app:fab_icon="@drawable/ic_sequence"/>
 
             <com.getbase.floatingactionbutton.FloatingActionButton
                 android:id="@+id/add_quiz_challenge"
@@ -108,10 +101,18 @@
                 android:layout_height="wrap_content"
                 app:fab_colorNormal="#1565C0"
                 app:fab_addButtonSize="normal"
-                app:fab_title="Sequential Challenge"
-                app:fab_colorPressed="#2196F3"/>
+                app:fab_title="Quiz Challenge"
+                app:fab_colorPressed="#2196F3"
+                app:fab_icon="@drawable/ic_quiz"/>
 
-
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/add_basic_challenge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:fab_colorNormal="#1565C0"
+                app:fab_title="Basic Challenge"
+                app:fab_colorPressed="#2196F3"
+                app:fab_icon="@drawable/ic_basic"/>
 
 
         </com.getbase.floatingactionbutton.FloatingActionsMenu>
@@ -123,6 +124,40 @@
             <!--android:layout_gravity="bottom|end"-->
             <!--android:layout_margin="@dimen/fab_margin"-->
             <!--app:srcCompat="@android:drawable/ic_dialog_email"/>-->
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|bottom"
+            android:padding="16dp"/>
+
+        <LinearLayout
+            android:id="@+id/sign_out_and_disconnect"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <Button
+                android:id="@+id/sign_out_button"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sign OUt" />
+
+            <Button
+                android:id="@+id/disconnect_button"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Disconnect" />
+        </LinearLayout>
 
     </android.support.design.widget.CoordinatorLayout>
 

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "705477496394",
+    "firebase_url": "https://discoverers-22035226.firebaseio.com",
+    "project_id": "discoverers-22035226",
+    "storage_bucket": "discoverers-22035226.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:705477496394:android:58412e3667c601da",
+        "android_client_info": {
+          "package_name": "com.computecrib.discoverers"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "705477496394-ffiu4vpunk7i401tjairergs3slve0qo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpplx3tNdIiEs8dghsWkt3oDb3osrLSH0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "705477496394-ffiu4vpunk7i401tjairergs3slve0qo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
