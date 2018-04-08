@@ -87,7 +87,7 @@ public class ChallengesFragment extends Fragment {
                         Challenge challenge = new Challenge(title, desc,
                                 hint, loc_name, loc_address, score);
                         challenges.add(0, challenge);
-                        adapter.notifyItemInserted(0);
+                        adapter.notifyItemInserted(      0);
 
                         //Notification.Builder nb = mNotificatioinUtils.getAndroidChannelNotification(title, body);
                         //mNotificatioinUtils.getManager().notify(101, nb.build());

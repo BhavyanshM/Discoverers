@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -28,7 +27,8 @@ public class ChallengeDetailActivity extends AppCompatActivity {
     private TextView mChallengeDesc;
     private TextView mChallengeHint;
     private TextView mChallengeScore;
-    private TextView mSelectedLocation;
+    private TextView mSelectedLocationName;
+    private TextView mSelectedLocationAddress;
     private Button mSubmitButton;
     private Button mSetLocationButton;
 
@@ -53,7 +53,8 @@ public class ChallengeDetailActivity extends AppCompatActivity {
         mChallengeScore = (TextView) findViewById(R.id.tv_score);
         mChallengeScore.setText(Integer.toString(MainActivity.currentChallenge.getReward()));
 
-        mSelectedLocation = (TextView) findViewById(R.id.tv_challenge_location);
+        mSelectedLocationName = (TextView) findViewById(R.id.tv_selected_loc_name);
+        mSelectedLocationAddress = (TextView) findViewById(R.id.tv_selected_loc_address);
         mSubmitButton = (Button) findViewById(R.id.bv_submit_challenge);
         mSetLocationButton = (Button) findViewById(R.id.bv_locate);
 
@@ -85,7 +86,8 @@ public class ChallengeDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent returnIntent = new Intent();
-                returnIntent.putExtra("result", mSelectedLocation.getText().toString());
+                returnIntent.putExtra("loc_name", mSelectedLocationName.getText().toString());
+                returnIntent.putExtra("loc_address", mSelectedLocationAddress.getText().toString());
                 setResult(Activity.RESULT_OK,returnIntent);
                 finish();
             }
@@ -100,7 +102,8 @@ public class ChallengeDetailActivity extends AppCompatActivity {
                 com.google.android.gms.location.places.Place place = PlacePicker.getPlace(data, this);
                 String toastMsg = String.format("Place: %s", place.getName());
                 Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
-                mSelectedLocation.setText(place.getName());
+                mSelectedLocationName.setText(place.getName());
+                mSelectedLocationAddress.setText(place.getAddress());
 //                places.add(new Place(place.getName().toString(), place.getAddress().toString(), places.size()));
 //                adapter.notifyDataSetChanged();
             }
